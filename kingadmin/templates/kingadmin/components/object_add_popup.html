@@ -1,0 +1,32 @@
+
+{% load admin_tags %}
+
+
+{% include 'kingadmin/filter_search_box.html' %}
+<script src="/static/kingadmin/js/kingadmin/filter_horizontal.js"></script>
+{% check_pop_up_window request form_obj %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Add {{ model_verbose_name}}
+        </h3>
+    </div>
+
+
+
+
+    <form method="post" onsubmit="return CheckSelectedOptions()" class=" form-horizontal form-padding">{% csrf_token %}
+
+        {% include 'kingadmin/components/table_add_form.html' %}
+
+        <div class="panel-footer">
+            <div class="row">
+
+                <div class="col-sm-12 ">
+                    <button class="btn btn-info pull-right "  type="submit">Add</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>

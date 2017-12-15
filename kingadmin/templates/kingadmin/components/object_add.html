@@ -1,0 +1,69 @@
+
+{% load admin_tags %}
+
+
+{% include 'kingadmin/filter_search_box.html' %}
+
+
+    <link rel="stylesheet" href="/static/kingadmin/plugins/datetimeshortcuts/css/base.css">
+    <link rel="stylesheet" href="/static/kingadmin/plugins/datetimeshortcuts/css/forms.css">
+
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/a.js"></script>
+	<script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/core.js"></script>
+	<script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/jquery_002.js"></script>
+	<script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/jquery.js"></script>
+	<script  type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/actions.js"></script>
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/xregexp.js"></script>
+    <script type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/calendar.js"></script>
+    <script  type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/admin/DateTimeShortcuts.js"></script>
+
+
+    <script src="/static/kingadmin/js/kingadmin/filter_horizontal.js"></script>
+
+{% check_pop_up_window request form_obj %}
+<div class="panel">
+    {% if messages %}
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert"><i class="pci-cross pci-circle"></i></button>
+            {% for message in messages %}
+                <i class="fa fa-check-circle"></i> {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="panel-heading">
+        <h3 class="panel-title">Add {{ model_verbose_name }}
+            <a href="{% if admin_class.back_link %}{{ admin_class.back_link }}{% else %}{% url 'table_list' app_name model_name %}{% endif %}" class="btn btn-sm btn-info btn-labeled fa fa-mail-reply pull-right">
+                 返回 {{ table_obj.model_verbose_name }}
+            </a>
+        </h3>
+    </div>
+
+
+    <form method="post" enctype="multipart/form-data" novalidate onsubmit="return CheckSelectedOptions()" class=" form-horizontal form-padding">{% csrf_token %}
+        {#<form method="post" class=" form-horizontal form-padding">{% csrf_token %}#}
+        {% include 'kingadmin/components/table_add_form.html' %}
+
+        <div class="panel-footer">
+            <div class="row">
+
+                <div class="col-sm-4 col-lg-offset-1 ">
+                    <button class="btn btn-info  "  type="submit">Add</button>
+                </div>
+                <div class="col-sm-6 ">
+                    <button class="btn btn-success " name="_continue" type="submit">Save and continue editing</button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-info  " name="_add_another"   >Save and add another</button>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+

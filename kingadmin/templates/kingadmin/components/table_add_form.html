@@ -1,0 +1,40 @@
+ {% load admin_tags %}
+
+        <div class="panel-body">
+            {% if form_obj.errors%}
+                <div class="alert alert-danger media fade in">
+                    <strong>表单错误!</strong> {% get_form_global_error form_obj.errors %}
+                </div>
+            {% endif %}
+            {% for field in form_obj %}
+                <div class="form-group">
+                    {%if field.field.required%}
+                        <label class="col-md-2 control-label">
+                            <b>{{field.label}}</b>
+                        </label>
+                    {% else %}
+                        <label class="col-md-2 control-label">
+                           {{field.label}}
+                        </label>
+                    {% endif %}
+                    <div class="col-md-9">
+                        {% if field.name not in admin_class.filter_horizontal %}
+                            {{ field }}
+                            {% add_date_time_select  form_obj field%}
+                            {% add_fk_search_btn form_obj field %}
+                            {% add_new_obj_btn form_obj field %}
+                            {% if field.errors %}
+                                <span style="color: red">{{ field.errors }}</span>
+                            {% endif %}
+                        {% else %}
+                            {% include 'kingadmin/filter_horizontal_multi_select.html' %}
+                            {% if field.errors %}
+                                <span style="color: red">{{ field.errors }}</span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div> <!--end panel-body-->

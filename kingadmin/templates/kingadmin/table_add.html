@@ -1,0 +1,33 @@
+{% extends 'kingadmin/index.html' %}
+{% load admin_tags %}
+
+{% block page-title-text %}
+{{ model_verbose_name }}
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block searchbox %}{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'table_index' %}">Home</a></li>
+        <li><a href="{% url 'app_tables'  app_name %}">{{ app_name|capfirst }}</a></li>
+
+        <li><a href="{% url 'table_list' app_name model_name %}">{{ model_verbose_name }}</a></li>
+        <li class="active"> 添加 {{ model_verbose_name }}</li>
+    </ol>
+ {% endblock %}
+
+{% block page-content %}
+    {% include 'kingadmin/components/object_add.html' %}
+{% endblock %}
+
+
+{% block extra-js%}
+    <script  type="text/javascript" src="/static/kingadmin/plugins/datetimeshortcuts/js/filter_date_display.js"></script>
+
+{% endblock %}
+
